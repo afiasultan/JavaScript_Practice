@@ -41,7 +41,53 @@ const randomBtn = document.querySelector(".random-btn");
 
 let currentItem = 0;
 
+// load initial item
+window.addEventListener("DOMContentLoaded", function() {
 
+    showPerson(currentItem);
+
+    prevBtn.addEventListener("click", function() {
+
+        if (currentItem == 0) {
+            currentItem = reviews.length - 1;
+        } else {
+            currentItem -= 1;
+        }
+        showPerson(currentItem);
+
+    });
+
+    nextBtn.addEventListener("click", function() {
+
+        if (currentItem >= reviews.length - 1) {
+            currentItem = 0;
+        } else {
+            currentItem += 1;
+        }
+        showPerson(currentItem);
+    
+    });
+
+    randomBtn.addEventListener("click", function() {
+
+        currentItem = getRandomNumber();
+        showPerson(currentItem);
+    
+    });
+
+    
+
+
+});
+
+// show person based on item 
+function showPerson(person) {
+    const item = reviews[person];
+    img.src = item.img;
+    author.textContent = item.name;
+    job.textContent = item.job;
+    info.textContent = item.text;
+}
 
 function getRandomNumber() {
     return Math.floor(Math.random() * reviews.length);
